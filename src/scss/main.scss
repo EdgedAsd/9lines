@@ -1,0 +1,428 @@
+@import "variables";
+@import "functions";
+@import "mixins";
+@import "sprites";
+@import "fonts";
+@import "vendor";
+@import "base";
+@import "helpers";
+
+html {
+	font-family: $font-family-roboto, sans-serif;
+	font-size: 12px;
+
+	@media (max-width: 768px) {
+		font-size: 10px;
+	}
+
+	@media (max-width: 640px) {
+		font-size: 6px;
+	}
+}
+
+body {
+	overflow: scroll;
+	background-color: $color-light-grey;
+}
+
+.section::after {
+	content: "";
+	position: absolute;
+	left: -10%;
+	bottom: 0;
+	width: 120%;
+	height: 2px;
+	background-color: $color-light-grey;
+}
+
+.form-cv {
+	position: relative;
+	margin: 60px auto;
+	padding: 0 20px;
+	width: 66vw;
+	background-color: $color-white;
+
+	header.form-header {
+		position: relative;
+		display: flex;
+		justify-content: space-between;
+		padding: 30px 0;
+
+		.form__image {
+			border-radius: 70px;
+			width: 140px;
+			height: 140px;
+			background: url("../images/cv_photo.jpg") 50% 30%;
+			background-size: 130% 130%;
+
+			@media (min-width: 1440px) {
+				border-radius: 90px;
+				width: 180px;
+				height: 180px;
+			}
+
+			@media (max-width: 925px) {
+				border-radius: 55px;
+				width: 110px;
+				height: 110px;
+			}
+
+			@media (max-width: 768px) {
+				border-radius: 45px;
+				width: 90px;
+				height: 90px;
+			}
+
+			@media (max-width: 640px) {
+				border-radius: 30px;
+				width: 60px;
+				height: 60px;
+			}
+		}
+
+		form.form-info {
+			position: relative;
+			width: 460px / (660px - 40px) * 100%;
+
+			input.form-info__input {
+				position: relative;
+				display: block;
+				margin-bottom: 32px;
+				border: none;
+				border-bottom: 2px solid $color-dark-grey;
+				padding: 0 0 8px;
+				width: 100%;
+				font-family: $font-family-roboto, sans-serif;
+				font-weight: 500;
+				font-size: 1rem;
+				text-transform: uppercase;
+				color: $color-grey;
+				transition: color 0.3s;
+
+				&:-webkit-autofill {
+					box-shadow: inset 0 0 0 50px #fff;
+					-webkit-text-fill-color: $color-grey;
+					color: $color-grey;
+				}
+
+				&:focus {
+					outline: none;
+					color: $color-blue;
+				}
+
+				@media (max-width: 925px) {
+					margin-bottom: 20px;
+				}
+
+				@media (max-width: 640px) {
+					margin-bottom: 15px;
+				}
+			}
+
+			.form-info__input--last {
+				margin-bottom: 0;
+			}
+
+			.approved {
+				position: absolute;
+				right: -15px;
+				bottom: -20px;
+				width: 184px;
+				height: 166px;
+				background: url("../images/approved.png") center no-repeat;
+				background-size: 100% 100%;
+
+				@media (max-width: 640px) {
+					width: 120px;
+					height: 109px;
+				}
+			}
+
+			@media (max-width: 640px) {
+				width: 420px / (660px - 40px) * 100%;
+			}
+		}
+	}
+
+	section.skills {
+		position: relative;
+		padding: 35px 0 40px;
+
+		.skills__title {
+			margin-bottom: 25px;
+			font-weight: 500;
+			font-size: 1.5rem;
+		}
+
+		.skills-list {
+			display: flex;
+			flex-wrap: wrap;
+			align-content: space-between;
+			justify-content: space-between;
+			height: 140px;
+
+			.skill-item {
+				position: relative;
+				width: 160px / 660px * 100%;
+				height: 20px;
+
+				.skill-item__label {
+					margin-left: 28px;
+					height: 20px;
+					font-size: 1rem;
+					line-height: 20px;
+					text-transform: uppercase;
+					color: $color-grey;
+					transition: color 0.2s;
+					cursor: pointer;
+
+					&::before {
+						content: "";
+						position: absolute;
+						left: 0;
+						top: 0;
+						border-radius: 5px;
+						width: 20px;
+						height: 20px;
+						line-height: 20px;
+						text-align: center;
+						background-color: $color-light-grey;
+						transition: background-color 0.3s;
+
+						@media (max-width: 640px) {
+							border-radius: 3px;
+							width: 12px;
+							height: 12px;
+							line-height: 12px;
+						}
+					}
+
+					&:active {
+						color: $color-sea-blue;
+					}
+
+					@media (max-width: 640px) {
+						margin-left: 18px;
+						height: 12px;
+						line-height: 12px;
+					}
+				}
+
+				.skill-item__value {
+					display: none;
+
+					&:checked + .skill-item__label::before {
+						content: "\2713";
+						font-weight: 600;
+						font-size: 1.35rem;
+						color: $color-white;
+						background-color: $color-blue;
+					}
+				}
+
+				&:hover .skill-item__label {
+					color: $color-blue;
+				}
+			}
+		}
+	}
+
+	section.js-level {
+		display: flex;
+		justify-content: space-between;
+		padding: 60px 0 65px;
+
+		.js-indicator {
+			width: 260px;
+			height: 130px;
+
+			.js-display-wrapper {
+				position: relative;
+				overflow: hidden;
+				width: 100%;
+				height: 100%;
+
+				.js-display {
+					float: left;
+					clip-path: circle();
+					shape-outside: circle();
+					width: 260px;
+					height: 260px;
+					cursor: pointer;
+
+					.js-display__sector {
+						position: absolute;
+						left: 50px;
+						top: 0;
+						z-index: 5;
+						border-style: solid;
+						border-width: 130px 80px 0;
+						border-color: transparent;
+						width: 0;
+						height: 0;
+
+						@media (max-width: 768px) {
+							left: 38px;
+							border-width: 100px 62px 0;
+						}
+
+						@media (max-width: 640px) {
+							left: 27px;
+							border-width: 70px 43px 0;
+						}
+					}
+
+					.js-display__sector_yellow {
+						border-color: $color-yellow transparent transparent transparent;
+						transform: rotate(-64deg);
+						transform-origin: 50% 100%;
+					}
+
+					.js-display__sector_green {
+						border-color: $color-green transparent transparent transparent;
+					}
+
+					.js-display__sector_blue {
+						border-color: $color-blue transparent transparent transparent;
+						transform: rotate(64deg);
+						transform-origin: 50% 100%;
+					}
+
+					.js-display__central-circle {
+						position: absolute;
+						left: 57.5px;
+						bottom: 0;
+						z-index: 10;
+						border-radius: 50% 50% 0 0 / 100% 100% 0 0;
+						width: 145px;
+						height: 72.5px;
+						background-color: $color-white;
+
+						@media (max-width: 768px) {
+							left: 44px;
+							width: 112px;
+							height: 56px;
+						}
+
+						@media (max-width: 640px) {
+							left: 31px;
+							width: 78px;
+							height: 39px;
+						}
+					}
+
+					.js-display__divider {
+						position: absolute;
+						left: 127px;
+						top: 0;
+						z-index: 20;
+						width: 6px;
+						height: 130px;
+						background-color: $color-white;
+						transform-origin: 50% 100%;
+
+						@media (max-width: 768px) {
+							left: 98px;
+							width: 4px;
+							height: 100px;
+						}
+
+						@media (max-width: 640px) {
+							left: 68px;
+							width: 3px;
+							height: 70px;
+						}
+					}
+
+					.js-display__divider_left {
+						transform: rotate(-33deg);
+					}
+
+					.js-display__divider_right {
+						transform: rotate(33deg);
+					}
+
+					@media (max-width: 768px) {
+						width: 200px;
+						height: 200px;
+					}
+
+					@media (max-width: 640px) {
+						width: 140px;
+						height: 140px;
+					}
+				}
+			}
+
+			.js-indicator__string {
+				position: absolute;
+				left: 105px;
+				bottom: 54px;
+				z-index: 30;
+				width: 60px;
+				height: 40px;
+				background: url("../images/string.png") center no-repeat;
+				background-size: cover;
+				transform-origin: 50px / 60px * 100% 75%;
+				transition: transform 1s ease-out;
+
+				@media (max-width: 768px) {
+					left: 85px;
+					bottom: 56px;
+					width: 45px;
+					height: 30px;
+				}
+
+				@media (max-width: 640px) {
+					left: 66px;
+					bottom: 60px;
+					width: 30px;
+					height: 20px;
+				}
+			}
+
+			@media (max-width: 768px) {
+				width: 200px;
+				height: 100px;
+			}
+
+			@media (max-width: 768px) {
+				width: 140px;
+				height: 70px;
+			}
+		}
+
+		.level-value {
+			width: 320px / 660px * 100%;
+
+			.level-value__title {
+				font-size: 1.5rem;
+			}
+
+			.level-text {
+				position: relative;
+				font-family: "Roboto Black", "arial";
+				font-size: 50px / 12px * 1rem;
+
+				.level-text__value {
+					position: absolute;
+					left: 0;
+					top: 0;
+					transition: opacity 1s;
+				}
+
+				.level-text__value_new {
+					opacity: 0;
+				}
+
+				.level-text__value_old {
+					color: $color-blue;
+				}
+			}
+
+			@media (max-width: 768px) {
+				width: 280px / 660px * 100%;
+			}
+		}
+	}
+}

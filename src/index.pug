@@ -1,0 +1,130 @@
+extends pug/base
+
+block content
+	main.main-content
+		.form-cv
+			header.form-header.section
+				.form__image
+				form.form-info(autocomplete="off")
+					input.form-info__input(
+						type="text"
+						name="name"
+						placeholder="Имя"
+						value="Владимир Дурманов"
+					)
+
+					input.form-info__input(
+						type="text"
+						name="birthday"
+						placeholder="Дата Рождения"
+						value="5 марта 2002"
+					)
+
+					input.form-info__input(
+						type="text"
+						name="city"
+						placeholder="City"
+						value="Москва"
+					)
+
+					input.form-info__input.form-info__input--last(
+						type="text"
+						name="contacts"
+						placeholder="Contacts"
+						value="+7-963-767-60-45"
+					)
+
+					.approved
+
+			section.skills.section
+				h5.skills__title
+					| Навыки
+
+				ul.skills-list
+					-
+						const skills = [
+							{
+								name: "html5",
+								skill_id: "html",
+								value: true
+							},
+							{
+								name: "sass",
+								skill_id: "sass",
+								value: true
+							},
+							{
+								name: "vanillajs",
+								skill_id: "vanilla",
+								value: true
+							},
+							{
+								name: "git",
+								skill_id: "git",
+								value: true
+							},
+							{
+								name: "css3",
+								skill_id: "css",
+								value: true
+							},
+							{
+								name: "less",
+								skill_id: "less",
+								value: false
+							},
+							{
+								name: "angular",
+								skill_id: "angular",
+								value: false
+							},
+							{
+								name: "foundation",
+								skill_id: "foundation",
+								value: false
+							},
+							{
+								name: "бэм",
+								skill_id: "bem",
+								value: true
+							},
+							{
+								name: "gulp",
+								skill_id: "gulp",
+								value: true
+							},
+							{
+								name: "jquery",
+								skill_id: "jquery",
+								value: true
+							},
+							{
+								name: "bootstrap",
+								skill_id: "bootstrap",
+								value: false
+							}
+						]
+					each skill in skills
+						li.skill-item
+							input.skill-item__value(type="checkbox" checked = skill.value ? true : false id=skill.skill_id)
+							label.skill-item__label(for=skill.skill_id)= skill.name
+
+			section.js-level
+				.js-indicator
+					.js-display-wrapper
+						.js-display
+							.js-display__sector.js-display__sector_yellow
+							.js-display__sector.js-display__sector_green
+							.js-display__sector.js-display__sector_blue
+							.js-display__central-circle
+							.js-display__divider.js-display__divider_left
+							.js-display__divider.js-display__divider_right
+
+					.js-indicator__string
+
+				.level-value
+					h5.level-value__title
+						| Мой уровень владения #[br] JavaScript
+					p.level-text
+						span.level-text__value.level-text__value_old
+						span.level-text__value.level-text__value_new
